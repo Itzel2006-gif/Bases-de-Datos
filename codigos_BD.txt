@@ -1,0 +1,139 @@
+                              BASES DE DATOS: LENGUAJE DE DEFINICIÓN Y MANIPULACIÓN DE DATOS
+
+TABLA--> Lenguaje de DEFINICIÓN DE DATOS (DDL)
+
+- Crear base de datos con cotejamiento
+create database NOMBD default character set UTF8 collate utf8_general_ci;
+
+- Crear base de datos sin cotejamiento
+create database NOMBD;
+
+- Seleccionar una base de datos
+use NOMBD;
+
+- Mostrar las bases de datos del servidor
+show databases;
+
+- Borrar una base de datos
+drop database NOMBD;
+
+- Crear Tabla (con clave primaria al inicio)
+create table NOMTABLA(
+Campo1 tipo dato (longitud) not null primary key auto_increment,
+Campo2 tipo dato (longitud) not null,
+.
+.
+.
+CampoN tipo dato (longitud) not null);
+
+- Crear tabla (con clave primaria al final)
+create table NOMTABLA(
+Campo1 tipo dato (longitud) not null,
+Campo2 tipo dato (longitud) not null,
+.
+.
+.
+CampoN tipo dato (longitud) not null,
+primary key(campo o campos));
+
+- Crear tabla (con clave foránea)
+create table NOMTABLA(
+Campo1 tipo dato (longitud) not null,
+Campo2 tipo dato (longitud) not null,
+.
+.
+CampoN tipo dato (longitud) not null,
+primary key(campo o campos),
+foreign key (Campo) references NOMTABLA (Campo) on delete cascade on update cascade);
+
+- Mostrar las tablas de una base de datos
+show tables;
+
+- Describir la estructura de la tabla
+show columns from NOMTABLA;
+describe NOMTABLA;
+desc NOMTABLA;
+
+- Borrar tabla
+drop table NOMTABLA;
+
+- Cambiar el nombre a una tabla
+rename table NOMTABLA_ACTUAL to NOMTABLA_NUEVO;
+alter table NOMTABLA_ACTUAL rename NOMTABLA_NUEVO;
+
+
+
+
+CAMPOS--> Lenguaje de DEFINICIÓN DE DATOS (DDL)
+
+- Agregar un campo al final de los campos
+alter table NOMTABLA add column NOMCAMPO Tipo dato (longitud) null;
+
+- Agregar un campo al inicio de los campos
+alter table NOMTABLA add column NOMCAMPO Tipo dato (longitud) not null first;
+
+alter table NOMTABLA add column NOMCAMPO Tipo dato (longitud) null first;
+
+- Agregar un campo después de un campo determinado
+alter table NOMTABLA add column NOMCAMPO Tipo dato (longitud) not null after NOMCAMPO;
+
+alter table NOMTABLA add column NOMCAMPO Tipo dato (longitud) null after NOMCAMPO;
+
+- Borrar campo
+alter table NOMTABLA drop column NOMCAMPO;
+
+- Cambiar el nombre a un campo
+alter table NOMTABLA change NOMCAMPO_ACTUAL NOMCAMPO_NUEVO Tipo dato (longitud) not null;
+
+- Cambiar solo el tipo de dato a un campo
+alter table NOMTABLA change NOMCAMPO_ACTUAL NOMCAMPO_ ACTUAL Tipo dato (longitud) not null;
+
+alter table NOMTABLA modify NOMCAMPO Tipo dato (longitud) not null;
+
+
+
+
+CLAVES--> Lenguaje de DEFINICIÓN DE DATOS (DDL)
+
+- Agregar clave primaria
+alter table NOMTABLA add primary key (Campo o campos);
+
+- Borrar una clave primaria
+alter table NOMTABLA drop primary key;
+
+- Agregar clave foránea
+alter table NOMTABLA add foreign key (Campo) references NOMTABLA (Campo) on delete cascade on update cascade;
+
+- Borrar una clave foránea
+alter table NOMTABLA drop foreign key NOMFK;
+
+
+
+
+REGISTROS--> Lenguaje de MANIPULACIÓN DE DATOS (DML)
+
+- Insertar registros
+insert into NOMTABLA (Campo1, Campo2, …, CampoN) values (Valor1, Valor2, …, ValorN);
+insert into NOMTABLA values (Valor1, Valor2, …, ValorN);
+
+- Ingresar registros desde un archivo .txt o csv
+load data local infile ‘ruta de ubicación del archivo’
+into table NOMTABLA
+fields terminated by ‘,’
+lines terminated by ‘\n’;
+
+- Eliminar todos los registros de la tabla
+delete from NOMTABLA;
+
+- Eliminar un registro de la tabla
+delete from NOMTABLA where condición;
+
+- Actualizar un registro de la tabla
+update NOMTABLA set CAMPO2=’NuevoValor’, CAMPO4=’NuevoValor’ where condición;
+
+- Visualizar los registros insertados en una tabla
+select * from NOMTABLA;
+
+select * from profesor where CodProf between 1 and 5;
+select * from estudiante where Nombre like 'M%'; -> Empeza con M
+select * from estudiante where sexo is NULL;
